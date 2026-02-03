@@ -1,0 +1,37 @@
+{
+  "name": "guna/users",
+  "description": "Guna version of the Tigress users module",
+  "keywords": [
+    "guna",
+    "users",
+    "gebruikersbeheer"
+  ],
+  "minimum-stability": "stable",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Kurt Gregoor",
+      "email": "kurt.gregoor@go-next.be",
+      "role": "Project Manager, Developer"
+    },
+    {
+      "name": "Rudy Mas",
+      "email": "rudy.mas@rudymas.be",
+      "homepage": "https://rudymas.be",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=8.5"
+  },
+  "require-dev": {
+    "tigress/core": "dev-main"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tigress\\": "src/",
+      "Controller\\": "src/controllers",
+      "Repository\\": "src/repositories"
+    }
+  }
+}

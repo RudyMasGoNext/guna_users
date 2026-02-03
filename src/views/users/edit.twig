@@ -1,0 +1,104 @@
+{% extends 'base.twig' %}
+{% block js %}
+    {{ parent() }}
+    <script src="{{ BASE_URL }}/vendor/tigress/users/public/javascript/users/edit.js"></script>
+{% endblock %}
+{% block title %}{{ __('Edit user information') }}{% endblock %}
+{% block breadcrumb %}
+    <div class="row mb-2">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb" data-bs-theme="{{ WEBSITE.mode }}">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="{{ BASE_URL }}/users">{{ __('Users') }}</a></li>
+                    <li class="breadcrumb-item active">{{ __('Edit user information') }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-md-9">
+                <h3>{{ __('Edit user information') }}</h3>
+            </div>
+            <div class="col-md-3 text-end">
+            </div>
+        </div>
+        <form id="form" method="post" enctype="multipart/form-data">
+            <div class="row mb-2">
+                <div class="col-md-12">
+                    <fieldset class="mt-2">
+                        <input type="hidden" id="id" name="id" value="{{ user.id }}">
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <label for="last_name" class="form-label"><b>{{ __('Family name') }}</b></label>
+                                <input class="form-control" id="last_name" name="last_name" type="text"
+                                       value="{{ user.last_name }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="first_name" class="form-label"><b>{{ __('First name') }}</b></label>
+                                <input class="form-control" id="first_name" name="first_name" type="text"
+                                       value="{{ user.first_name }}" required>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-3">
+                                <label for="last_login" class="form-label"><b>{{ __('Last login') }}</b></label>
+                                <input class="form-control" id="last_login" name="last_login" type="datetime-local"
+                                       value="{{ user.last_login }}" disabled>
+                            </div>
+                            <div class="col-md-9">
+                                <label for="email" class="form-label"><b>{{ __('E-mail') }}</b></label>
+                                <input class="form-control" id="email" name="email" type="text"
+                                       value="{{ user.email }}">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-xl-4 col-md-6">
+                                <label for="access_level" class="form-label"><b>{{ __('Access level') }}</b></label>
+                                <select class="form-select" name="access_level" id="access_level" required>
+                                    {{ selectOptiesRights|raw }}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-xl-4 col-md-6">
+                                {{ add_slider('save_default', null, '<b>' ~ __('Set default permissions') ~ '</b>', 'back')|raw }}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3">
+                    <input type="hidden" name="action" value="Update">
+                    <button type="button" id="submitBtn" data-bs-toggle="modal" data-bs-target="#confirm-submit"
+                            class="btn btn-success"><i class="fa fa-save"></i> {{ __('Save') }}
+                    </button>
+                    <a class="btn btn-danger" href="{{ BASE_URL }}/users"><i class="fa fa-times"></i> {{ __('Cancel') }}</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Modal Dialog -->
+    <div class="modal fade" id="confirm-submit" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="color: black">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ __('Update user') }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ __('Are you sure you want to update the user?') }}</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="submit" class="btn btn-success">{{ __('Yes') }}</a>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{ __('No') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
