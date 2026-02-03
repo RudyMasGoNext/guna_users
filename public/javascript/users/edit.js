@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    $('#oauth_provider').on('change', function () {
+    $('#post_oauth_provider').on('change', function () {
         const value = $(this).val();
 
         $('#local_div').toggle(value === 'local');
