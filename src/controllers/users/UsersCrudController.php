@@ -2,7 +2,9 @@
 
 namespace Controller\users;
 
+use Exception;
 use JetBrains\PhpStorm\NoReturn;
+use Random\RandomException;
 use Repository\SystemRightsRepo;
 use Repository\UserRightsRepo;
 use Repository\UsersRepo;
@@ -17,14 +19,14 @@ use Twig\Error\SyntaxError;
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2025-2026 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 2026.01.27.0
+ * @version 2026.02.03.1
  * @package Tigress\Users
  */
 class UsersCrudController extends Controller
 {
     public function __construct()
     {
-        TRANSLATIONS->load(SYSTEM_ROOT . '/vendor/tigress/users/translations/translations.json');
+        TRANSLATIONS->load(SYSTEM_ROOT . '/vendor/guna/users/translations/translations.json');
     }
 
     /**
@@ -66,6 +68,8 @@ class UsersCrudController extends Controller
      * Save user
      *
      * @return void
+     * @throws RandomException
+     * @throws Exception
      */
     #[NoReturn] public function saveUser(): void
     {
@@ -75,6 +79,22 @@ class UsersCrudController extends Controller
         $users->loadById($_POST['id']);
         $user = $users->current();
         $user->updateByPost($_POST);
+
+        if ($_POST['post_oauth_provider'] === 'local' && !empty($_POST['post_password'])) {
+            $user->oauth_provider = 'local';
+            $user->username = $_POST['post_username'];
+            $user->salt = SECURITY->createSalt();
+            $user->authorized = SECURITY->createHash($_POST['post_password'], $user->salt);
+        } elseif ($_POST['post_oauth_provider'] === 'smartschool') {
+            $user->oauth_provider = 'smartschool';
+            $user->oauth_uid = $_POST['post_oauth_uid'];
+            $user->username = null;
+            $user->salt = SECURITY->createSalt();
+            $user->authorized = SECURITY->createHash($user->oauth_uid, $user->salt);
+        } else {
+            throw new Exception('Unsupported OAuth provider.', 400);
+        }
+
         $users->save($user);
 
         if (isset($_POST['save_default'])) {

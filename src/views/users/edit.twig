@@ -1,7 +1,7 @@
 {% extends 'base.twig' %}
 {% block js %}
     {{ parent() }}
-    <script src="{{ BASE_URL }}/vendor/tigress/users/public/javascript/users/edit.js"></script>
+    <script src="{{ BASE_URL }}/vendor/guna/users/public/javascript/users/edit.js"></script>
 {% endblock %}
 {% block title %}{{ __('Edit user information') }}{% endblock %}
 {% block breadcrumb %}
@@ -68,11 +68,38 @@
                                 {{ add_slider('save_default', null, '<b>' ~ __('Set default permissions') ~ '</b>', 'back')|raw }}
                             </div>
                         </div>
+                        <hr>
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label for="post_oauth_provider" class="form-label"><b>{{ __('Login system') }}</b></label>
+                                <select class="form-select" name="post_oauth_provider" id="post_oauth_provider" required>
+                                    <option value="" disabled selected>{{ __('Choose login system') }}</option>
+                                    <option value="local" {% if user.oauth_provider == 'local' %}selected{% endif %}>{{ __('Local login') }}</option>
+                                    <option value="smartschool" {% if user.oauth_provider == 'smartschool' %}selected{% endif %}>{{ __('Smartschool login') }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8" {% if user.oauth_provider != 'local' %}style="display: none"{% endif %} id="local_div">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="post_username" class="form-label"><b>{{ __('Username') }}</b></label>
+                                        <input class="form-control" id="post_username" name="post_username" type="text" value="{{ user.username }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="post_password" class="form-label"><b>{{ __('Enter new password') }}</b></label>
+                                        <input class="form-control" id="post_password" name="post_password" type="password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8" {% if user.oauth_provider != 'smartschool' %}style="display: none"{% endif %} id="smartschool_div">
+                                <label for="post_oauth_uid" class="form-label"><b>{{ __('Login UID') }}</b></label>
+                                <input class="form-control" id="post_oauth_uid" name="post_oauth_uid" type="text" value="{{ user.oauth_uid }}">
+                            </div>
+                        </div>
                     </fieldset>
                 </div>
             </div>
             <div class="row mb-2">
-                <div class="col-md-3">
+                <div class="col-md-12">
                     <input type="hidden" name="action" value="Update">
                     <button type="button" id="submitBtn" data-bs-toggle="modal" data-bs-target="#confirm-submit"
                             class="btn btn-success"><i class="fa fa-save"></i> {{ __('Save') }}

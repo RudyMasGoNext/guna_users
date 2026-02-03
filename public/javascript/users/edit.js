@@ -7,4 +7,11 @@ document.addEventListener('DOMContentLoaded', function () {
             form.submit();
         });
     }
+
+    $('#oauth_provider').on('change', function () {
+        const value = $(this).val();
+
+        $('#local_div').toggle(value === 'local');
+        $('#smartschool_div').toggle(value === 'smartschool');
+    }).trigger('change');
 });

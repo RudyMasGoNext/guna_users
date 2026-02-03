@@ -1,11 +1,11 @@
 {% extends 'datatable.twig' %}
 {% block css %}
     {{ parent() }}
-    <link href="/vendor/tigress/users/public/css/users/edit_rights.css" rel="stylesheet">
+    <link href="/vendor/guna/users/public/css/users/edit_rights.css" rel="stylesheet">
 {% endblock %}
 {% block js %}
     {{ parent() }}
-    <script src="/vendor/tigress/users/public/javascript/users/edit_rights.js"></script>
+    <script src="/vendor/guna/users/public/javascript/users/edit_rights.js"></script>
 {% endblock %}
 {% block title %}{{ __('Edit user rights') }}{% endblock %}
 {% block breadcrumb %}
@@ -85,7 +85,7 @@
                 </div>
             </div>
             <div class="row mb-2">
-                <div class="col-md-3">
+                <div class="col-md-12">
                     <input type="hidden" name="id" value="{{ user.id }}">
                     <button type="button" id="submitBtn" data-bs-toggle="modal" data-bs-target="#confirm-submit"
                             class="btn btn-success"><i class="fa fa-save"></i> {{ __('Save') }}

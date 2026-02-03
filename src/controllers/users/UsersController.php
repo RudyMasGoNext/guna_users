@@ -11,12 +11,12 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 /**
- * Class UsersController (PHP version 8.4)
+ * Class UsersController (PHP version 8.5)
  *
  * @author Rudy Mas <rudy.mas@rudymas.be>
- * @copyright 2025 Rudy Mas (https://rudymas.be)
+ * @copyright 2025-2026 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 2025.06.27.0
+ * @version 2026.02.03.0
  * @package Tigress\Users
  */
 class UsersController extends Controller
@@ -26,8 +26,8 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-        TWIG->addPath('vendor/tigress/users/src/views');
-        TRANSLATIONS->load(SYSTEM_ROOT . '/vendor/tigress/users/translations/translations.json');
+        TWIG->addPath('vendor/guna/users/src/views');
+        TRANSLATIONS->load(SYSTEM_ROOT . '/vendor/guna/users/translations/translations.json');
     }
 
     /**

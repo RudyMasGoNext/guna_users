@@ -11,7 +11,7 @@ class UsersRepo extends Repository
 {
     public function __construct()
     {
-        TRANSLATIONS->load(SYSTEM_ROOT . '/vendor/tigress/users/translations/translations.json');
+        TRANSLATIONS->load(SYSTEM_ROOT . '/vendor/guna/users/translations/translations.json');
 
         $this->dbName = 'default';
         $this->table = 'users';
