@@ -2,6 +2,18 @@
   "routes": [
     {
       "request": "GET",
+      "path": "/account/edit",
+      "controller": "accounts\\AccountsController",
+      "method": "edit"
+    },
+    {
+      "request": "POST",
+      "path": "/account/edit",
+      "controller": "accounts\\AccountsCrudController",
+      "method": "save"
+    },
+    {
+      "request": "GET",
       "path": "/users",
       "controller": "users\\UsersController",
       "method": "index",
