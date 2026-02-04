@@ -30,16 +30,35 @@
                 <div class="col-md-12">
                     <fieldset class="mt-2">
                         <input type="hidden" id="id" name="id" value="{{ user.id }}">
+                        {% if SERVER_TYPE == 'development' %}
+                            <div class="row mb-2">
+                                <div class="col-md-4">
+                                    <label for="GunaX_id" class="form-label"><b>{{ __('GunaX ID') }}</b></label>
+                                    <input class="form-control" id="GunaX_id" name="GunaX_id" type="text"
+                                           value="{{ user.id }}" disabled>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="Guna_id" class="form-label"><b>{{ __('Guna ID') }}</b></label>
+                                    <input class="form-control" id="Guna_id" name="Guna_id" type="text"
+                                           value="{{ user.gebruiker_id }}" disabled>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="p_persoon" class="form-label"><b>{{ __('Informat ID') }}</b></label>
+                                    <input class="form-control" id="p_persoon" name="p_persoon" type="text"
+                                           value="{{ _SESSION.gebruiker.p_persoon }}" disabled>
+                                </div>
+                            </div>
+                        {% endif %}
                         <div class="row mb-2">
                             <div class="col-md-6">
                                 <label for="last_name" class="form-label"><b>{{ __('Family name') }}</b></label>
                                 <input class="form-control" id="last_name" name="last_name" type="text"
-                                       value="{{ user.last_name }}" required>
+                                       value="{{ user.last_name }}" disabled>
                             </div>
                             <div class="col-md-6">
                                 <label for="first_name" class="form-label"><b>{{ __('First name') }}</b></label>
                                 <input class="form-control" id="first_name" name="first_name" type="text"
-                                       value="{{ user.first_name }}" required>
+                                       value="{{ user.first_name }}" disabled>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -49,7 +68,8 @@
                                        value="{{ user.last_login }}" disabled>
                             </div>
                             <div class="col-md-9">
-                                <label for="email" class="form-label"><b>{{ __('E-mail') }}</b></label>
+                                <label for="email" class="form-label"><b>{{ __('E-mail') }}
+                                        ({{ __('Work E-mail only!') }})</b></label>
                                 <input class="form-control" id="email" name="email" type="text"
                                        value="{{ user.email }}">
                             </div>
@@ -60,7 +80,7 @@
                             <button type="button" id="submitBtn" data-bs-toggle="modal" data-bs-target="#confirm-submit"
                                     class="btn btn-success"><i class="fa fa-save"></i> {{ __('Save') }}
                             </button>
-                            <a class="btn btn-danger" href="{{ BASE_URL }}/users"><i
+                            <a class="btn btn-danger" href="{{ BASE_URL }}/home"><i
                                         class="fa fa-times"></i> {{ __('Cancel') }}</a>
                         </div>
                         <div class="col-md-6 text-end">

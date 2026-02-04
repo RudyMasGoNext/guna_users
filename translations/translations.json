@@ -33,6 +33,7 @@
     "User successfully saved.": "Gebruiker succesvol opgeslagen.",
     "Username": "Gebruikersnaam",
     "We couldn't find the user's information.": "We konden de gebruikersinformatie niet vinden.",
+    "Work E-mail only!": "Alleen werk e-mail!",
     "Your account has been updated successfully.": "Uw account is succesvol bijgewerkt."
   },
   "fr": {
@@ -69,6 +70,7 @@
     "User successfully saved.": "Utilisateur enregistré avec succès.",
     "Username": "Nom d'utilisateur",
     "We couldn't find the user's information.": "Nous n'avons pas pu trouver les informations de l'utilisateur.",
+    "Work E-mail only!": "Seulement e-mail professionnel !",
     "Your account has been updated successfully.": "Votre compte a été mis à jour avec succès."
   },
   "de": {
@@ -105,6 +107,7 @@
     "User successfully saved.": "Benutzer erfolgreich gespeichert.",
     "Username": "Benutzername",
     "We couldn't find the user's information.": "Wir konnten die Benutzerinformationen nicht finden.",
+    "Work E-mail only!": "Nur Arbeits-E-Mail!",
     "Your account has been updated successfully.": "Ihr Konto wurde erfolgreich aktualisiert."
   },
   "es": {
@@ -141,6 +144,7 @@
     "User successfully saved.": "Usuario guardado con éxito.",
     "Username": "Nombre de usuario",
     "We couldn't find the user's information.": "No pudimos encontrar la información del usuario.",
+    "Work E-mail only!": "¡Solo correo electrónico laboral!",
     "Your account has been updated successfully.": "Su cuenta ha sido actualizada con éxito."
   },
   "it": {
@@ -177,6 +181,7 @@
     "User successfully saved.": "Utente salvato con successo.",
     "Username": "Nome utente",
     "We couldn't find the user's information.": "Non siamo riusciti a trovare le informazioni dell'utente.",
+    "Work E-mail only!": "Solo e-mail di lavoro!",
     "Your account has been updated successfully.": "Il tuo account è stato aggiornato con successo."
   },
   "sv": {
@@ -213,6 +218,7 @@
     "User successfully saved.": "Användare sparad framgångsrikt.",
     "Username": "Användarnamn",
     "We couldn't find the user's information.": "Vi kunde inte hitta användarens information.",
+    "Work E-mail only!": "Endast arbets-e-post!",
     "Your account has been updated successfully.": "Ditt konto har uppdaterats framgångsrikt."
   }
 }

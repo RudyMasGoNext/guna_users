@@ -32,8 +32,9 @@ class UsersRepo extends Repository
      */
     public function getAll(?string $orderBy = null, ?string $where = null, ?string $groupBy = null): array
     {
-        $sql = "SELECT *
-                FROM users";
+        $sql = "SELECT u.*, g.platform AS platform
+                FROM users as u
+                LEFT JOIN gebruikers as g ON u.gebruiker_id = g.id";
         if ($where !== null) {
             $sql .= " WHERE $where";
         }

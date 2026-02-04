@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
             layout: {
                 top: {
                     searchPanes: {
-                        layout: 'columns-3',
+                        layout: 'columns-2',
                         viewTotal: false,
                         cascadePanes: true,
                         initCollapsed: true,
                         orderable: false,
-                        columns: [6]
+                        columns: [4,7]
                     },
                 },
             },
@@ -39,14 +39,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 {
                     title: __('Family name'),
                     data: "last_name",
+                    className: "text-nowrap",
                 },
                 {
                     title: __('First name'),
                     data: "first_name",
+                    className: "text-nowrap",
                 },
                 {
                     title: __('E-mail'),
                     data: "email",
+                },
+                {
+                    title: __('Platform'),
+                    data: "platform",
                 },
                 {
                     title: __('Last login'),
@@ -93,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
             ],
             columnDefs: [
                 {
-                    targets: 4,
+                    targets: 5,
                     type: "datetime-moment",
                     render: function (data, type) {
                         if (!data) {

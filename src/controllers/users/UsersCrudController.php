@@ -49,9 +49,9 @@ class UsersCrudController extends Controller
         $users = new UsersRepo();
 
         if ($_SESSION['user']['access_level'] < 100) {
-            $usersData = $users->getAll(null, "active = {$active} AND access_level < 100");
+            $usersData = $users->getAll(null, "u.active = {$active} AND u.access_level < 100");
         } else {
-            $usersData = $users->getAll(null , "active = {$active}");
+            $usersData = $users->getAll(null , "u.active = {$active}");
         }
 
         $userRights = new UserRightsRepo();
