@@ -87,7 +87,6 @@ class UsersCrudController extends Controller
             $user->authorized = SECURITY->createHash($_POST['post_password'], $user->salt);
         } elseif ($_POST['post_oauth_provider'] === 'smartschool') {
             $user->oauth_provider = 'smartschool';
-            $user->oauth_uid = $_POST['post_oauth_uid'];
             $user->username = null;
             $user->salt = SECURITY->createSalt();
             $user->authorized = SECURITY->createHash($user->oauth_uid, $user->salt);

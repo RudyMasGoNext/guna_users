@@ -17,68 +17,99 @@
     </div>
 {% endblock %}
 {% block content %}
-<div class="container">
-    <div class="row mb-2">
-        <div class="col-md-9">
-            <h3>{{ __('Edit personal account information') }}</h3>
-        </div>
-        <div class="col-md-3 text-end">
-        </div>
-    </div>
-    <form id="form" method="post" enctype="multipart/form-data">
+    <div class="container">
         <div class="row mb-2">
-            <div class="col-md-12">
-                <fieldset class="mt-2">
-                    <input type="hidden" id="id" name="id" value="{{ user.id }}">
-                    <div class="row mb-2">
+            <div class="col-md-9">
+                <h3>{{ __('Edit personal account information') }}</h3>
+            </div>
+            <div class="col-md-3 text-end">
+            </div>
+        </div>
+        <form id="form" method="post" enctype="multipart/form-data">
+            <div class="row mb-2">
+                <div class="col-md-12">
+                    <fieldset class="mt-2">
+                        <input type="hidden" id="id" name="id" value="{{ user.id }}">
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <label for="last_name" class="form-label"><b>{{ __('Family name') }}</b></label>
+                                <input class="form-control" id="last_name" name="last_name" type="text"
+                                       value="{{ user.last_name }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="first_name" class="form-label"><b>{{ __('First name') }}</b></label>
+                                <input class="form-control" id="first_name" name="first_name" type="text"
+                                       value="{{ user.first_name }}" required>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-md-3">
+                                <label for="last_login" class="form-label"><b>{{ __('Last login') }}</b></label>
+                                <input class="form-control" id="last_login" name="last_login" type="datetime-local"
+                                       value="{{ user.last_login }}" disabled>
+                            </div>
+                            <div class="col-md-9">
+                                <label for="email" class="form-label"><b>{{ __('E-mail') }}</b></label>
+                                <input class="form-control" id="email" name="email" type="text"
+                                       value="{{ user.email }}">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="row mt-3">
                         <div class="col-md-6">
-                            <label for="last_name" class="form-label"><b>{{ __('Family name') }}</b></label>
-                            <input class="form-control" id="last_name" name="last_name" type="text"
-                                   value="{{ user.last_name }}" required>
+                            <button type="button" id="submitBtn" data-bs-toggle="modal" data-bs-target="#confirm-submit"
+                                    class="btn btn-success"><i class="fa fa-save"></i> {{ __('Save') }}
+                            </button>
+                            <a class="btn btn-danger" href="{{ BASE_URL }}/users"><i
+                                        class="fa fa-times"></i> {{ __('Cancel') }}</a>
                         </div>
-                        <div class="col-md-6">
-                            <label for="first_name" class="form-label"><b>{{ __('First name') }}</b></label>
-                            <input class="form-control" id="first_name" name="first_name" type="text"
-                                   value="{{ user.first_name }}" required>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-md-3">
-                            <label for="last_login" class="form-label"><b>{{ __('Last login') }}</b></label>
-                            <input class="form-control" id="last_login" name="last_login" type="datetime-local"
-                                   value="{{ user.last_login }}" disabled>
-                        </div>
-                        <div class="col-md-9">
-                            <label for="email" class="form-label"><b>{{ __('E-mail') }}</b></label>
-                            <input class="form-control" id="email" name="email" type="text"
-                                   value="{{ user.email }}">
+                        <div class="col-md-6 text-end">
+                            {% if (user.oauth_provider == 'local') %}
+                                <button type="button" id="changePasswordBtn" data-bs-toggle="modal"
+                                        data-bs-target="#change-password" class="btn btn-primary">
+                                    <i class="fa fa-key"></i> {{ __('Change Password') }}
+                                </button>
+                            {% endif %}
                         </div>
                     </div>
-                    <hr>
-                    <div class="row mb-2">
-                        <div class="col-md-12">
-                            <label for="locale" class="form-label"><b>{{ __('Language') }}</b></label>
-                            <select class="form-select" id="locale" name="locale" required>
-                                <option value="{{ user.locale }}" {% if user.locale == 'nl-BE' %}selected{% endif %}>{{ __('Dutch') }}</option>
-                                <option value="{{ user.locale }}" {% if user.locale == 'en-US' %}selected{% endif %}>{{ __('English') }}</option>
-                                <option value="{{ user.locale }}" {% if user.locale == 'fr-BE' %}selected{% endif %}>{{ __('French') }}</option>
-                                <option value="{{ user.locale }}" {% if user.locale == 'de-DE' %}selected{% endif %}>{{ __('German') }}</option>
-                            </select>
-                        </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <form id="changePasswordForm" method="post" enctype="multipart/form-data"
+          action="{{ BASE_URL }}/account/change/password">
+        <div class="modal fade" id="change-password" tabindex="-1" aria-labelledby="changePasswordLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changePasswordLabel">{{ __('Change Password') }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </fieldset>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <button type="button" id="submitBtn" data-bs-toggle="modal" data-bs-target="#confirm-submit"
-                                class="btn btn-success"><i class="fa fa-save"></i> {{ __('Save') }}
-                        </button>
-                        <a class="btn btn-danger" href="{{ BASE_URL }}/users"><i class="fa fa-times"></i> {{ __('Cancel') }}</a>
+                    <div class="modal-body">
+                        <form id="changePasswordForm" method="post">
+                            <div class="mb-3">
+                                <label for="new_password" class="form-label"><b>{{ __('New Password') }}</b></label>
+                                <input type="password" class="form-control" id="new_password" name="new_password"
+                                       required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirm_password"
+                                       class="form-label"><b>{{ __('Confirm Password') }}</b></label>
+                                <input type="password" class="form-control" id="confirm_password"
+                                       name="confirm_password"
+                                       required>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-md-6 text-end">
-                        <button type="button" id="changePasswordBtn" class="btn btn-primary"><i class="fa fa-key"></i> {{ __('Change password') }}</button>
+                    <div class="modal-footer">
+                        <button type="submit" id="changePasswordSubmit"
+                                class="btn btn-success">{{ __('Change Password') }}</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{{ __('Close') }}</button>
+                    </div>
                 </div>
             </div>
         </div>
     </form>
-</div>
 {% endblock %}

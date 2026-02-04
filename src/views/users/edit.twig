@@ -92,7 +92,7 @@
                             </div>
                             <div class="col-md-8" {% if user.oauth_provider != 'smartschool' %}style="display: none"{% endif %} id="smartschool_div">
                                 <label for="post_oauth_uid" class="form-label"><b>{{ __('Login UID') }}</b></label>
-                                <input class="form-control" id="post_oauth_uid" name="post_oauth_uid" type="text" value="{{ user.oauth_uid }}">
+                                <input class="form-control" id="post_oauth_uid" name="post_oauth_uid" type="text" value="{{ user.oauth_uid }}" disabled>
                             </div>
                         </div>
                     </fieldset>

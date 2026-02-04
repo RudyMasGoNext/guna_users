@@ -3,7 +3,9 @@
 namespace Controller\accounts;
 
 use JetBrains\PhpStorm\NoReturn;
+use Random\RandomException;
 use Repository\UsersRepo;
+use Tigress\Core;
 
 /**
  * Class AccountsCrudController (PHP version 8.5)
@@ -16,6 +18,11 @@ use Repository\UsersRepo;
  */
 class AccountsCrudController
 {
+    public function __construct()
+    {
+        TRANSLATIONS->load(SYSTEM_ROOT . '/vendor/guna/users/translations/translations.json');
+    }
+
     #[NoReturn]
     public function save(): void
     {
@@ -26,5 +33,27 @@ class AccountsCrudController
         $usersRepo->save($user);
         $_SESSION['success'] = __('Your account has been updated successfully.');
         TWIG->redirect('/home');
+    }
+
+    /**
+     * Change the user's password
+     *
+     * @throws RandomException
+     */
+    #[NoReturn]
+    public function changePassword(): void
+    {
+        if ($_POST['new_password'] !== $_POST['confirm_password']) {
+            $_SESSION['error'] = __('The new password and its confirmation do not match.');
+            TWIG->redirect('/account/edit');
+        }
+
+        $usersRepo = new UsersRepo();
+        $usersRepo->loadById($_SESSION['user']['id']);
+        $user = $usersRepo->current();
+        $user->salt = SECURITY->createSalt();
+        $user->authorized = SECURITY->createHash($_POST['new_password'], $user->salt);
+        $usersRepo->save($user);
+        TWIG->redirect('/account/edit');
     }
 }

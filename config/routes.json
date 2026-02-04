@@ -1,6 +1,12 @@
 {
   "routes": [
     {
+      "request": "POST",
+      "path": "/account/change/password",
+      "controller": "accounts\\AccountsCrudController",
+      "method": "changePassword"
+    },
+    {
       "request": "GET",
       "path": "/account/edit",
       "controller": "accounts\\AccountsController",
